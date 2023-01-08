@@ -62,6 +62,20 @@ app.route("/articles/:articleTitle")
                 res.send("No articles matching that title was found.");
             }
         });
+    })
+    .put((req, res) => {
+        Article.replaceOne({ title: req.params.articleTitle }, { title: req.body.title, content: req.body.content }, (err) => {
+            if (!err) {
+                res.send("Successfully updated article.")
+            }
+        });
+    })
+    .patch((req, res) => {
+        Article.updateOne({ title: req.params.articleTitle }, { $set: req.body }, (err) => {
+            if (!err) {
+                res.send("Successfully updated article.")
+            }
+        });
     });
 
 app.listen(3000, () => {
