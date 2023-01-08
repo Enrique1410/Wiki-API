@@ -76,6 +76,13 @@ app.route("/articles/:articleTitle")
                 res.send("Successfully updated article.")
             }
         });
+    })
+    .delete((req, res) => {
+        Article.deleteOne({ title: req.params.articleTitle }, (err) => {
+            if (!err) {
+                res.send("Successfully deleted article.")
+            }
+        });
     });
 
 app.listen(3000, () => {
